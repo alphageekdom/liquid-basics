@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Liquid Basics</title>
+    </head>
+
+    <body>
+        <script type="text/template">
+            <h3>{{ name | capitalize | prepend: "Welcome To "}}</h3>
+        </script>
+
+        <div id="result"></div>
+
+        <!-- Liquid For Development -->
+        <script src="https://cdn.jsdelivr.net/npm/liquidjs/dist/liquid.browser.umd.js"></script>
+        <script>
+            const template = document.querySelector('[type="text/template"]')
+            const result = document.querySelector('#result')
+            const engine = new liquidjs.Liquid()
+
+            engine
+                .parseAndRender(template.innerHTML, { name: 'liquid' })
+                .then(html => result.innerHTML = html)
+        </script>
+    </body>
+
+</html>
