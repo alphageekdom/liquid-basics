@@ -9,7 +9,12 @@
 
     <body>
         <script type="text/template">
-            <h3>{{ name | capitalize | prepend: "Welcome To "}}</h3>
+
+            <h1>Hi {{ user.name }}</h1>
+            <h3>{{ user.order_id | prepend: "Your Order: #"}}</h3>
+            <p>{{ user.email | prepend: "Email: "}}</p>
+            <p>This order has been cancelled because you're a {{ user.age }} year old cat.</p>
+            <span style="font-weight: 700">Total Refund: {{ user.price | plus: user.tax }}</span>
         </script>
 
         <div id="result"></div>
@@ -22,7 +27,16 @@
             const engine = new liquidjs.Liquid()
 
             engine
-                .parseAndRender(template.innerHTML, { name: 'liquid' })
+                .parseAndRender(template.innerHTML, {
+                    user: {
+                        email: "tuxedocat@gmail.com",
+                        name: "Michael Jackson",
+                        order_id: 1234,
+                        age: 5,
+                        price: 59.99,
+                        tax: 5,
+                    }
+                })
                 .then(html => result.innerHTML = html)
         </script>
     </body>
